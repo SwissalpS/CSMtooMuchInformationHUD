@@ -44,17 +44,17 @@ local p = tmi.pathMod .. 'module_'
 -- comment out modules you don't want and reorder  --
 -- first loaded go on top in HUD and others bellow --
 -----------------------------------------------------
---dofile(p .. 'serverInfo.lua')
+dofile(p .. 'serverInfo.lua')
 dofile(p .. 'wieldedItem.lua')
---dofile(p .. 'v1.lua')
---dofile(p .. 'v2.lua')
+dofile(p .. 'v1.lua')
+dofile(p .. 'v2.lua')
 dofile(p .. 'vM.lua')
 dofile(p .. 'countDig.lua')
 dofile(p .. 'countPlace.lua')
---dofile(p .. 'countUse.lua')
+dofile(p .. 'countUse.lua')
 dofile(p .. 'countDigAndPlace.lua')
---dofile(p .. 'time.lua')
---dofile(p .. 'pos.lua')
+dofile(p .. 'time.lua')
+dofile(p .. 'pos.lua')
 -----------------------------------------------------
 -----------------------------------------------------
 
