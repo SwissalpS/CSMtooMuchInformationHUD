@@ -1,7 +1,9 @@
 -- module countDig --
 -- by SwissalpS --
 -- Displays dig-count since reset.
-local module = {}
+local module = {
+	speedClearDelay = 7, -- seconds after last dig that speed stays displayed
+}
 
 function module.clear(index)
 
@@ -21,12 +23,26 @@ function module.init(index)
 	module.m.iCount = tmi.store:get_int('countDig_i')
 	core.register_on_dignode(module.onDig)
 
+	module.lastDig = core.get_us_time()
+	module.speed = 0
+	-- multiply now so we don't have to on every update itteration
+	module.speedClearDelay = module.speedClearDelay * 1000000
+
 end -- init
 
 
 function module.onDig(pos, node)
 
 	module.m.iCount = module.m.iCount + 1
+
+	-- this speed analysis is not as informative as doing it on update,
+	-- that is, with bigger sample, but it's more precise and the code
+	-- is more elegant.
+	now = core.get_us_time()
+	local diffSeconds = (now - module.lastDig) * .000001
+	module.lastDig = now
+	module.speed = 1 / diffSeconds
+
 	return false
 
 end -- onDig
@@ -41,7 +57,15 @@ end -- save
 
 function module.update(index)
 
-	return 'D: ' .. tmi.niceNaturalString(tmi.modules[index].iCount)
+	local digs = tmi.modules[index].iCount
+
+	-- clear speed if no digging has been going on
+	if module.speedClearDelay < core.get_us_time() - module.lastDig then
+		module.speed = 0
+	end
+	
+	return 'D: ' .. tmi.niceNaturalString(digs) .. '   '
+			.. tostring(module.speed):sub(1, tmi.conf.precision) .. 'n/s'
 
 end -- update
 
@@ -57,4 +81,3 @@ tmi.addModule({
 })
 
 --print('module countDig loaded')
-
