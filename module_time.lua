@@ -1,6 +1,6 @@
 -- module time --
 -- by SwissalpS --
--- displays in-game-time.
+-- displays in-game-time and elapsed session time.
 local joined = core.get_us_time()
 
 local function update(index)
