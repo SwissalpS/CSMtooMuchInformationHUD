@@ -3,6 +3,10 @@
 -- displays in-game-time and elapsed session time.
 local joined = core.get_us_time()
 
+
+local function clear(index) joined = core.get_us_time() end -- clear
+
+
 local function update(index)
 
 	local fT = core.get_timeofday()
@@ -23,6 +27,8 @@ tmi.addModule({
 	id = 'time',
 	title = 'time',
 	value = 'time module',
+	onClear = clear,
+	onInit = init,
 	onUpdate = update,
 })
 
