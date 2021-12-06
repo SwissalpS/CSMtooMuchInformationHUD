@@ -3,10 +3,12 @@
 -- Displays dig-count since reset. Also dig speed indicator.
 local module = {
 	speedClearDelay = 7, -- seconds after last dig that speed stays displayed
+	speedMax = 0
 }
 
 function module.clear(index)
 
+	module.speedMax = 0
 	tmi.modules[index].iCount = 0
 	module.save(index)
 
@@ -42,6 +44,7 @@ function module.onDig(pos, node)
 	local diffSeconds = (now - module.lastDig) * .000001
 	module.lastDig = now
 	module.speed = 1 / diffSeconds
+	if module.speed > module.speedMax then module.speedMax = module.speed end
 
 	return false
 
@@ -63,9 +66,10 @@ function module.update(index)
 	if module.speedClearDelay < core.get_us_time() - module.lastDig then
 		module.speed = 0
 	end
-	
+
 	return 'D: ' .. tmi.niceNaturalString(digs) .. '   '
 			.. tostring(module.speed):sub(1, tmi.conf.precision) .. 'n/s'
+			--.. '\n' .. tostring(module.speedMax):sub(1, tmi.conf.precision) .. 'n/s max'
 
 end -- update
 
