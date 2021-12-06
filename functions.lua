@@ -252,13 +252,7 @@ function tmi.toggleModule(index)
 end -- toggleModule
 
 
-function tmi.twoDigitNumberString(iN)
-
-	local s = tostring(math.floor(iN))
-	if 1 == #s then return '0' .. s end
-	return s
-
-end -- twoDigitNumberString
+function tmi.twoDigitNumberString(iN) return string.format('%02i', iN) end -- twoDigitNumberString
 
 
 function tmi.update()
