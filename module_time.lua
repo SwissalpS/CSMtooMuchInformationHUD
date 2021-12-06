@@ -23,7 +23,6 @@ tmi.addModule({
 	id = 'time',
 	title = 'time',
 	value = 'time module',
-	onInit = init,
 	onUpdate = update,
 })
 
