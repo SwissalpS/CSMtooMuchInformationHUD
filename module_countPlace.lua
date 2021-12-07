@@ -2,10 +2,14 @@
 -- by SwissalpS --
 -- displays a counter of items placed since reset.
 -- Value can be kept persistant over sessions.
-local module = {}
+local module = {
+	speedClearDelay = 7, -- seconds after last dig that speed stays displayed
+	speedMax = 0
+}
 
 function module.clear(index)
 
+	module.speedMax = 0
 	tmi.modules[index].iCount = 0
 	module.save(index)
 
@@ -22,12 +26,27 @@ function module.init(index)
 	module.m.iCount = tmi.store:get_int('countPlace_i')
 	core.register_on_placenode(module.onPlace)
 
+	module.lastPlace = core.get_us_time()
+	module.speed = 0
+	-- multiply now so we don't have to on every update itteration
+	module.speedClearDelay = module.speedClearDelay * 1000000
+
 end -- init
 
 
 function module.onPlace(pointed_thing, node)
 
 	module.m.iCount = module.m.iCount + 1
+
+	-- this speed analysis is not as informative as doing it on update,
+	-- that is, with bigger sample, but it's more precise and the code
+	-- is more elegant.
+	now = core.get_us_time()
+	local diffSeconds = (now - module.lastPlace) * .000001
+	module.lastPlace = now
+	module.speed = 1 / diffSeconds
+	if module.speed > module.speedMax then module.speedMax = module.speed end
+
 	return false
 
 end -- onPlace
@@ -42,7 +61,14 @@ end -- save
 
 function module.update(index)
 
-	return 'P: ' .. tmi.niceNaturalString(tmi.modules[index].iCount)
+	-- clear speed if no digging has been going on
+	if module.speedClearDelay < core.get_us_time() - module.lastPlace then
+		module.speed = 0
+	end
+
+	return 'P: ' .. tmi.niceNaturalString(tmi.modules[index].iCount) .. '   '
+			.. tostring(module.speed):sub(1, tmi.conf.precision) .. 'n/s '
+			.. tostring(module.speedMax):sub(1, tmi.conf.precision) .. 'n/s max'
 
 end -- update
 
@@ -58,4 +84,3 @@ tmi.addModule({
 })
 
 --print('module countPlace loaded')
-
