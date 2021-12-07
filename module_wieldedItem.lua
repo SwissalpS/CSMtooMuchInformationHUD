@@ -6,11 +6,24 @@
 local function update(index)
 
 	local oWI = tmi.player:get_wielded_item()
+	local oMeta = oWI:get_meta()
 	local sItemstring = oWI:get_name()
 	local iCount = oWI:get_count()
 	local sDescription = oWI:get_description()
+	local iWear = oWI:get_wear()
+	local sWear
+	if 0 == iWear then
+		sWear = 'None'
+	else
+		sWear = tmi.niceNaturalString(65535 - iWear)
+	end
 
-	return iCount .. ' ' .. (sDescription or sItemstring) .. '\n\n'
+	local sPos = oMeta:get_string('target_pos')
+	if '' ~= sPos then sWear = sPos end
+
+	return iCount .. ' ' .. (sDescription or sItemstring)
+			.. '\nWear: ' .. sWear
+			.. '\n'
 
 end -- update
 
@@ -23,4 +36,3 @@ tmi.addModule({
 })
 
 --print('module wieldedItem loaded')
-
