@@ -54,6 +54,7 @@ dofile(p .. 'countPlace.lua')
 dofile(p .. 'countUse.lua')
 dofile(p .. 'countDigAndPlace.lua')
 dofile(p .. 'time.lua')
+dofile(p .. 'timeElapsed.lua')
 dofile(p .. 'pos.lua')
 -----------------------------------------------------
 -----------------------------------------------------
