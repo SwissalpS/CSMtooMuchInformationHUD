@@ -44,6 +44,7 @@ local p = tmi.pathMod .. 'module_'
 -- comment out modules you don't want and reorder  --
 -- first loaded go on top in HUD and others bellow --
 -----------------------------------------------------
+--dofile(p .. 'debugChannel.lua')
 dofile(p .. 'serverInfo.lua')
 dofile(p .. 'wieldedItem.lua')
 dofile(p .. 'v1.lua')
