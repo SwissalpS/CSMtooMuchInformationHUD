@@ -1,6 +1,7 @@
 -- module countDig --
 -- by SwissalpS --
 -- Displays dig-count since reset. Also dig speed indicator.
+-- Value can be kept persistant over sessions.
 local module = {
 	speedClearDelay = 7, -- seconds after last dig that speed stays displayed
 	speedMax = 0
