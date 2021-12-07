@@ -68,8 +68,8 @@ function module.update(index)
 	end
 
 	return 'D: ' .. tmi.niceNaturalString(digs) .. '   '
-			.. tostring(module.speed):sub(1, tmi.conf.precision) .. 'n/s'
-			--.. '\n' .. tostring(module.speedMax):sub(1, tmi.conf.precision) .. 'n/s max'
+			.. tostring(module.speed):sub(1, tmi.conf.precision) .. 'n/s '
+			.. tostring(module.speedMax):sub(1, tmi.conf.precision) .. 'n/s max'
 
 end -- update
 
