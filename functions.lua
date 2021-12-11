@@ -7,13 +7,13 @@ tModule = {
 	onClear = nil, -- function to clear/reset or nil. When set, adds a button
 				-- to formspec. This hook is called when button is pressed.
 	onDealoc = nil, -- function to run on shutdown or nil. E.g. to save data.
-	onHide = nil -- function or nil. Called when module is deactivated in formspec
+	onHide = nil, -- function or nil. Called when module is deactivated in formspec
 	onInit = nil, -- function to run on startup or nil.
 				-- E.g. to read values from datastore.
 				-- Can be called multiple times per session.
 				-- Check tmi.modules[index].bInitDone field to detect repeated call
 				-- or manipulate it in another hook to request a re-init
-	onReveal = nil -- function or nil. Called when module is activated in formspec
+	onReveal = nil, -- function or nil. Called when module is activated in formspec
 	onUpdate = nil, -- function to, update and return value, Is called at interval
 				-- or nil --> value field is used
 }) --]]
