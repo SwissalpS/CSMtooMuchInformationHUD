@@ -98,22 +98,24 @@ end -- formShow
 
 function tmi.init()
 
-	tmi.player = assert(core.localplayer)
-
 	-- don't do anything else if there is already a hud id stored
 	if tmi.hudID then return end
 
-	local tHud = {
-		hud_elem_type = 'text',
-		name = 'tmiHUD',
-		number = tmi.conf.colour,
-		position = { x = 0.002, y = 0.77 },
-		offset = { x = 8, y = -8 },
-		text = 'Too Much Info HUD',
-		scale = { x = 200, y = 60 },
-		alignment = { x = 1, y = -1 },
-	}
-	tmi.hudID = tmi.player:hud_add(tHud)
+	local bMain = tmi.isOn('__tmi__')
+
+	if bMain then
+		local tHud = {
+			hud_elem_type = 'text',
+			name = 'tmiHUD',
+			number = tmi.conf.colour,
+			position = { x = 0.002, y = 0.77 },
+			offset = { x = 8, y = -8 },
+			text = 'Too Much Info HUD',
+			scale = { x = 200, y = 60 },
+			alignment = { x = 1, y = -1 },
+		}
+		tmi.hudID = tmi.player:hud_add(tHud)
+	end
 
 	local iMax = #tmi.modules
 	if 0 == iMax then return end
@@ -126,6 +128,8 @@ function tmi.init()
 			m.bInitDone = true
 		end
 		-- TODO: onReveal should be called here, no?
+		-- not always. If game is launched with TMI-HUD hidden then module isn't
+		-- being revealed
 	end -- loop modules
 
 	print('[TMI modules initialized]')
@@ -181,6 +185,20 @@ function tmi.shutdown()
 	print('[TMI shutdown]')
 
 end -- shutdown
+
+
+function tmi.startupLoop()
+
+	tmi.player = core.localplayer
+
+	if tmi.player then
+		core.after(1, tmi.init)
+		core.after(2, tmi.update)
+	else
+		core.after(1, tmi.startupLoop)
+	end
+
+end -- startupLoop
 
 
 -- to toggle visibility of a module by index
@@ -293,4 +311,3 @@ end -- update
 
 
 --print('loaded functions.lua')
-
