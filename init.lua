@@ -44,19 +44,31 @@ local p = tmi.pathMod .. 'module_'
 -- comment out modules you don't want and reorder  --
 -- first loaded go on top in HUD and others bellow --
 -----------------------------------------------------
---dofile(p .. 'debugChannel.lua')
-dofile(p .. 'serverInfo.lua')
-dofile(p .. 'wieldedItem.lua')
-dofile(p .. 'v1.lua')
-dofile(p .. 'v2.lua')
-dofile(p .. 'vM.lua')
-dofile(p .. 'countDig.lua')
-dofile(p .. 'countPlace.lua')
-dofile(p .. 'countUse.lua')
-dofile(p .. 'countDigAndPlace.lua')
-dofile(p .. 'time.lua')
-dofile(p .. 'timeElapsed.lua')
-dofile(p .. 'pos.lua')
+--dofile(p .. 'debugChannel.lua') -- have not yet been able to use this
+--
+dofile(p .. 'serverInfo.lua') -- server ip, protocol version etc.
+--
+dofile(p .. 'wieldedItem.lua') -- description, wear and other info about wielded item
+--
+dofile(p .. 'v1.lua') -- velocity: vX, vY, vZ
+--
+dofile(p .. 'v2.lua') -- velocity: vXZ, vXYZ
+--
+dofile(p .. 'vM.lua') -- max velocity: vX, vY, vZ, vXZ, vXYZ
+--
+dofile(p .. 'countDig.lua') -- dig counter with speed and max
+--
+dofile(p .. 'countPlace.lua') -- build counter with speed and max
+--
+dofile(p .. 'countUse.lua') -- use counter
+--
+dofile(p .. 'countDigAndPlace.lua') -- added count of digs and builds
+--
+dofile(p .. 'time.lua') -- in-game time in 24h format
+--
+dofile(p .. 'timeElapsed.lua') -- real time passed
+--
+dofile(p .. 'pos.lua') -- current positon in nodes and mapblocks
 -----------------------------------------------------
 -----------------------------------------------------
 
