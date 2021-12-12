@@ -21,12 +21,21 @@ local function update(index)
 		sWear = tmi.niceNaturalString(65535 - iWear)
 	end
 
+	local sAux = ''
 	local sPos = oMeta:get_string('target_pos')
-	if '' ~= sPos then sWear = sPos end
+	if '' ~= sPos then
+		sAux = 'Target: ' .. sPos
+	else
+		sAux = 'Wear: ' .. sWear
+	end
 
-	return iCount .. ' ' .. (sDescription or sItemstring)
-			.. '\nItemstr: ' .. sItemstring
-			.. '\nWear: ' .. sWear
+	---------------------------------------------------------------
+	-- here you can comment out lines you don't want or add more --
+	-- depending on what you are interested in seeing in HUD     --
+	---------------------------------------------------------------
+	return (sDescription or sItemstring)
+			.. '\n' .. iCount .. ' ' .. sItemstring
+			.. '\n' .. sAux
 			.. '\n'
 
 end -- update
