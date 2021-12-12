@@ -1,7 +1,7 @@
 -- module pos --
 -- by SwissalpS --
 -- displays player position in nodes and block coordinates
--- taken from [postool]
+-- taken from [PosTool]
 local getPositionTablesForPos = function(tPos)
 
 	local x = math.floor(tPos.x + 0.5)

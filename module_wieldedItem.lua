@@ -17,6 +17,7 @@ local function update(index)
 	if 0 == iWear then
 		sWear = 'None'
 	else
+		-- invert wear amount
 		sWear = tmi.niceNaturalString(65535 - iWear)
 	end
 
