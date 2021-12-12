@@ -10,8 +10,6 @@ tmi = {
 }
 -- some values for users to configure
 tmi.conf = {
-	-- seconds to wait before init
-	startDelay = 7,
 	-- seconds between updates
 	interval = 0.5,
 	-- how many characters to show per vector
@@ -84,7 +82,7 @@ core.register_chatcommand('tmi', {
 })
 
 -- start init and display of modules delayed
-core.after(tmi.conf.startDelay, tmi.update)
+core.after(1, tmi.startupLoop)
 
 --print('[CSM, Too Much Info, Loaded]')
 print('[TMI Loaded]')
