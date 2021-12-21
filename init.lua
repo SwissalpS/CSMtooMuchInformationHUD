@@ -66,6 +66,8 @@ dofile(p .. 'time.lua') -- in-game time in 24h format
 --
 dofile(p .. 'timeElapsed.lua') -- real time passed
 --
+dofile(p .. 'timeMeseconsClear.lua') -- time since last penalty clear command
+--
 dofile(p .. 'pos.lua') -- current positon in nodes and mapblocks
 -----------------------------------------------------
 -----------------------------------------------------
