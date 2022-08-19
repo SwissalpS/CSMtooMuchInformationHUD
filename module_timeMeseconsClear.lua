@@ -2,8 +2,14 @@
 -- by SwissalpS --
 -- displays IRL time passed in since mesecons_clear_penalty command
 -- was issued.
+-- Abandoned as can't check if mesecons_debug is installed at all
 local timeOfReset = core.get_us_time()
 local hasChatCSM = not core.get_csm_restrictions().chat_messages
+-- never exists
+local hasMeseconsDebug = core.global_exists('mesecons_debug')
+--print('hasMeseconsDebug: ' .. tostring(hasMeseconsDebug))
+-- always returns a path
+--print('modpath: ' .. core.get_modpath('mesecons_debug'))
 
 
 local function clear(index) timeOfReset = core.get_us_time() end -- clear
@@ -15,7 +21,7 @@ local function update(index)
 	local sE = string.format('%02i:%02i:%02i', iE / 3600, iE / 60 % 60, iE % 60)
 
 	-- auto-clear on servers that allow sending commands
-	if hasChatCSM and 121 < iE then
+	if hasChatCSM and hasMeseconsDebug and 121 < iE then
 		core.run_server_chatcommand('mesecons_clear_penalty', '')
 		--clear(index)
 	end
