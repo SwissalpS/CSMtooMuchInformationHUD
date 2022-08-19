@@ -41,7 +41,7 @@ function module.onDig(pos, node)
 	-- this speed analysis is not as informative as doing it on update,
 	-- that is, with bigger sample, but it's more precise and the code
 	-- is more elegant.
-	now = core.get_us_time()
+	local now = core.get_us_time()
 	local diffSeconds = (now - module.lastDig) * .000001
 	module.lastDig = now
 	module.speed = 1 / diffSeconds
