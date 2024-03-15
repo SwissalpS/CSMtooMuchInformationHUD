@@ -13,12 +13,16 @@ local function update(index)
 	local iCount = oWI:get_count()
 	local sDescription = oWI:get_description()
 	local iWear = oWI:get_wear()
+	local iMax = 65535
+	-- invert wear amount
+	local iRemaining = iMax - iWear
+	local fRemainingPercent = .01 * math.floor(
+			10000 * iRemaining / iMax)
 	local sWear
 	if 0 == iWear then
 		sWear = 'None'
 	else
-		-- invert wear amount
-		sWear = tmi.niceNaturalString(65535 - iWear)
+		sWear = tmi.niceNaturalString(iRemaining)
 	end
 
 	local sAux = ''
@@ -26,7 +30,10 @@ local function update(index)
 	if '' ~= sPos then
 		sAux = 'Target: ' .. sPos
 	else
+		-- yes, it should be "Remaining wear" but that's
+		-- just too long on smaller screens
 		sAux = 'Wear: ' .. sWear
+				.. '  ' .. fRemainingPercent .. '%'
 	end
 
 	---------------------------------------------------------------

@@ -6,7 +6,7 @@
 -- you can blend, the loaded modules, in or out of the HUD
 -- by invoking a formspec with .tmi command.
 tmi = {
-	version = 20211211.1957,
+	version = 20240315.2202,
 }
 -- some values for users to configure
 tmi.conf = {
