@@ -105,7 +105,8 @@ function tmi.init()
 
 	if bMain then
 		local tHud = {
-			hud_elem_type = 'text',
+			[minetest.features.hud_def_type_field
+				and 'type' or 'hud_elem_type'] = 'text',
 			name = 'tmiHUD',
 			number = tmi.conf.colour,
 			position = { x = 0.002, y = 0.77 },
