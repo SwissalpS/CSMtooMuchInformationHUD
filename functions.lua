@@ -96,6 +96,14 @@ function tmi.formShow()
 end -- formShow
 
 
+function tmi.getVersion()
+	local tV = core.get_version()
+	tV.major = tonumber(tV.string:sub(1, 1))
+	tV.minor = tonumber(tV.string:sub(3, 3))
+	return tV
+end
+
+
 function tmi.init()
 
 	-- don't do anything else if there is already a hud id stored
@@ -104,8 +112,9 @@ function tmi.init()
 	local bMain = tmi.isOn('__tmi__')
 
 	if bMain then
+		local tV = tmi.getVersion()
 		local tHud = {
-			[minetest.features.hud_def_type_field
+			[(5 <= tV.major and 9 <= tV.minor)
 				and 'type' or 'hud_elem_type'] = 'text',
 			name = 'tmiHUD',
 			number = tmi.conf.colour,
